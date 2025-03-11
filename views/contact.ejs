@@ -1,0 +1,34 @@
+<%- include("partials/headers.ejs") %>
+
+<main class="container">
+    <div class="p-4 p-md-5 mb-4 mt-4 rounded text-body-emphasis teal">
+
+        <div class="row mb-2 justify-content-center">
+            <div class="col-lg-8">
+
+                <form action="/post" method="POST" class="form-subs row g-3">
+                    <h1 class="display-4 fst-italic">Let me know what's on your mind</h1>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="Firstname" name="fName" required>
+                      </div>
+                      <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="Lastname" name="lName" required>
+                      </div>
+                      <div class="col-12">
+                        <input type="email" class="form-control"  placeholder="E-mail" name="email" required>
+                      </div>
+                      <div class="col-12">
+                        <textarea class="form-control" name="description" rows="10" placeholder="Description" required></textarea>
+                      </div>
+                    <div class="col-12">
+                    <input class="btn btn-dark btn-lg btn-block"  type="submit" value="Submit">
+                    </div>
+        
+                </form>
+        
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include("partials/footers.ejs") %>

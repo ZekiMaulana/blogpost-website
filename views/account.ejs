@@ -1,0 +1,39 @@
+<%- include("partials/headers.ejs") %>
+
+<main class="container">
+    <div class="p-4 p-md-5 mb-4 mt-4 rounded text-body-emphasis teal">
+
+
+            <div class="row mb-2 justify-content-center">
+                <div class="col-lg-4">
+                        
+                        <% if (locals.type === "signup"){ %>
+                    <form action="/account/process?type=signup" method="POST" class="form-subs row g-3">
+                        <h1 class="display-5 fst-italic">Sign Up</h1>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" placeholder="Firstname" name="fName" required>
+                          </div>
+                          <div class="col-md-6">
+                            <input type="text" class="form-control" placeholder="Lastname" name="lName" required>
+                          </div>
+                        <% } else { %>
+                    <form action="/account/process?type=login" method="POST" class="form-subs row g-3">
+                        <h1 class="display-5 fst-italic">Log in</h1>
+                        <% } %>
+                        <div class="col-12">
+                            <input type="email" class="form-control"  placeholder="E-mail" name="email" required>
+                          </div>
+                          <div class="col-12">
+                            <input type="password" class="form-control"  placeholder="password (8-12 Character)" name="password" required>
+                          </div>
+                        <div class="col-12">
+                        <input class="btn btn-dark btn-block"  type="submit" value="Submit">
+                        </div>
+            
+                    </form>
+                </div>
+            </div>
+    </div>
+</main>
+
+<%- include("partials/footers.ejs") %>

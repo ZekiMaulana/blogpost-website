@@ -1,0 +1,91 @@
+<%- include("partials/headers.ejs") %>
+
+<main class="container">
+    <div class="p-4 p-md-5 mb-4 mt-4 rounded text-body-emphasis teal">
+
+      <div class="row mb-2">
+
+        <% if(locals.process === "view-one"){ %>
+            <div class="col-md-6">
+                    
+                    <% const article = post[0].split("/n ") %>
+                    <% const imgArticle = "/images/" + article[1] %>
+
+                    <h1 class="display-2 fst-italic"><%= article[0] %></h1>
+                    <p class="lead my-3"></p>
+                    <p class="lead mb-0"><a href="#" class="text-body-emphasis fw-bold"></a></p>
+            </div>
+
+            <div class="col-md-6">
+                <img src=<%= imgArticle %> class="card-img-top" alt="...">
+            </div>
+        </div>
+    </div>
+        <% } else { %>
+            <div class="col-md-6 align-self-center">
+                <h1 class="display-1 fst-italic text-mint" style="font-weight: bold;">Sehat Uang</h1>
+                <p class="lead my-3">Happiness is not in the mere possession of money; it lies in the joy of achievement, in the thrill of creative effort.</p>
+                <p class="lead mb-0"><a href="#" class="text-body-secondary fw-bold">Continue reading...</a></p>
+            </div>
+            <div class="col-md-6">
+                <img src="/images/image-quote.jpg" class="card-img-top" alt="...">
+            </div>
+        
+        
+      </div>
+    </div>
+    <% if(locals.fileNames[0] && locals.fileNames) { %>
+    <div class="row mb-2">
+        <% for (var i = 0; i < 2; i++) {%>
+            
+        <% const ranNum = Math.floor(Math.random()*textFile.length)%>
+        <% const article = textFile[ranNum].split("/n ") %>
+        <% var fileView = "/post?postId=" + fileNames[ranNum]  + "&code=view" %>
+        <% const imgArticle = "/images/" + article[1] %>
+        <div class="col-md-6">
+          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative mint">
+            <div class="col p-4 d-flex flex-column position-static">
+              <strong class="d-inline-block mb-2 text-primary-emphasis">World</strong>
+              <h3 class="mb-4"><%= article[0] %></h3>
+              <p class="card-text mb-auto"><%= article[3].slice(0,140) %>. . .</p>
+              <a href=<%= fileView %> class="icon-link gap-1 icon-link-hover stretched-link">
+                Continue reading
+                <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
+              </a>
+            </div>
+            <div class="col-auto d-none d-lg-block">
+                <img alt="thumbnail" style="height: 250px; width: 200px; object-fit: cover;" src=<%= imgArticle %>>
+            </div>
+          </div>
+        </div>
+        <% } %>
+      </div>
+      <% } }  %> 
+    <div class="row g-5">
+        <% if(locals.process === "view-one"){ %>
+            
+        <% const article = post[0].split("/n ") %>
+        <% var fileEdit = "/post?postId=" + fileNames[0]  + "&code=edit" %>
+        <% var fileDelete = "/post?postId=" + fileNames[0]  + "&code=delete" %>
+        <div class="col-md-7">
+            <h3 class="pb-4 mb-4 fst-italic ">
+                From the Firehose
+              </h3>
+              <div class="mb-4 btn-group gap-5">
+                <a href=<%= fileEdit %>><button type="button" class="btn btn-sm btn-outline-success align-self-center">Edit</button></a>
+                <a href=<%= fileDelete %>><button type="button" class="btn btn-sm btn-outline-danger">Delete</button></a>
+            </div>
+                <p class="border-bottom"> </p>
+              <p><%= article[3] %></p>
+        </div>
+        <%} else {%>
+
+        <%- include("partials/sample-blog.ejs") %>
+        <% } %>
+        <div class="col-md-1"></div>
+        <%- include("partials/recent-post.ejs") %>
+
+      </div>
+  
+  </main>
+<%- include("partials/footers.ejs") %>

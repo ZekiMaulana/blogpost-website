@@ -1,0 +1,32 @@
+<div class="col-md-4">
+    <div class="position-sticky" style="top: 2rem;">
+      <div class="p-4 mb-3 teal rounded">
+        <h4 class="fst-italic">About</h4>
+        <p class="mb-0">Customize this section to tell your visitors a little bit about your publication, writers, content, or something else entirely. Totally up to you.</p>
+      </div>
+
+      <div>
+        <h4 class="fst-italic">Recent posts</h4>
+        <ul class="list-unstyled">
+          <% if(locals.fileNames[0] && locals.fileNames) { for (var i = 0; i < textFile.length && i < 3; i++) {%>
+              <% var articles = textFile.slice(Math.max(textFile.length - 3, 0)) %>
+              <% const article = articles.reverse()[i].split("/n ") %>
+              <% const imgArticle = "/images/" + article[1] %>
+              <% const fileView = "/post?postId=" + fileNames[i]  + "&code=view" %>
+              
+          <li>
+            <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href=<%= fileView %>>
+              <img style="height: 100px; width: 130px; object-fit: cover;" src=<%= imgArticle %> alt="...">
+              <div class="col-lg-8">
+                <h6 class="mb-0"><%= article[0] %></h6>
+                <small class="text-body-secondary"><%= article[2] %></small>
+              </div>
+            </a>
+          </li>
+          <% }} %>
+          
+        </ul>
+      </div>
+
+    </div>
+  </div>

@@ -1,0 +1,86 @@
+<%- include("partials/headers.ejs") %>
+
+<main class="container">
+    <% if(locals.process == "view-all"){ %>
+
+        <% if(locals.fileNames[0] && locals.fileNames) { %>
+            <h1 class="fst-italic text-center my-5">All Post</h1>
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3 justify-content-center">
+            <% for (var i = 0; i < textFile.length; i++) {%></3>
+                <% const article = textFile[i].split("/n ") %>
+                <% var fileView = "/post?postId=" + fileNames[i]  + "&code=view" %>
+                <% var fileEdit = "/post?postId=" + fileNames[i]  + "&code=edit" %>
+                <% var fileDelete = "/post?postId=" + fileNames[i]  + "&code=delete" %>
+                <% const imgArticle = "/images/" + article[1] %>
+
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <a href=<%= fileView %> class="link-dark link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">
+                                <img style="height: 230px; object-fit: cover;" src=<%= imgArticle %> class="card-img-top" alt="..."></a>
+                            <div class="card-body">
+                                <a href=<%= fileView %> class="link-dark link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">
+                                    <h5 class="card-title"><%= article[0] %></h5></a>
+                            <p class="card-text"><%= article[3].slice(0,65) %>. . .</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href=<%= fileEdit %>><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                                <a href=<%= fileDelete %>><button type="button" class="btn btn-sm btn-outline-secondary">Delete</button></a>
+                            </div>
+                            <small class="text-body-secondary"><%= article[2] %></small>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+            <% } %>
+            </div>
+
+        <% } else {%>
+            <h1 class="fst-italic text-center my-5">There's no blog has been post</h1>
+        <% } %>
+        
+    <% } else if(locals.process == "edit"){ %>
+        <% const article = textFile[0].split("/n ") %>
+        <div class="p-4 p-md-5 mb-4 mt-4 rounded text-body-emphasis bg-body-secondary">
+
+            <div class="row mb-2 justify-content-center">
+            <div class="col-lg-6">
+                <form action="/post/process?code=edit" method="POST" class="form-subs">
+                    <h1 class="display-5 fst-italic">Edit post (<%= article[0] %>)</h1>
+
+                    <input type="text" name="postId" hidden value=<%= fileNames[0].split("/n ")[0] %>>
+                    <input class="form-control my-4" type="text" placeholder="Title blogpost" required name="title" value=<%= article[0] %>>
+
+                    <textarea class="form-control my-4" name="description" rows="10" placeholder="Description" required><%= article[3] %></textarea>
+                    <input class="btn btn-dark btn-lg btn-block"  type="submit" value="Submit">
+        
+                </form>
+           
+            </div>
+        </div>
+        </div>
+
+    <% } else if(locals.process == "input"){ %>
+        <div class="p-4 p-md-5 mb-4 mt-4 rounded text-body-emphasis teal">
+
+            <div class="row mb-2 justify-content-center">
+                <div class="col-lg-6">
+                    <form action="/post/process?code=input" method="POST" class="form-subs">
+                        <h1 class="display-4 fst-italic">Create your own post</h1>
+
+                        <input class="form-control my-4" type="text" placeholder="Title blogpost" name="title" required>
+
+                        <textarea class="form-control my-4" name="description" rows="10" placeholder="Description" required></textarea>
+                        <input class="btn btn-dark btn-lg btn-block"  type="submit" value="Submit">
+            
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    <% } %>
+    
+
+</main>
+
+<%- include("partials/footers.ejs") %>
